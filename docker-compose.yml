@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./app
+    volumes:
+      - ./app/:/app
+    ports:
+      - "3000:3000"
+  cypress:
+    image: cypress/included:5.3.0
+    working_dir: /e2e
+    depends_on:
+      - app
+    environment:
+      - CYPRESS_baseUrl=http://localhost:3000
+      - DISPLAY
+    network_mode: host
+    volumes:
+      - ./:/e2e/
