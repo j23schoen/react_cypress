@@ -26,6 +26,21 @@ it('X is the winner', () => {
     cy.contains('Winner: X')
 })
 
+it('clicking new game empties the game', () => {
+    cy.visit('/')
+    clickSquare(0, 0)
+    clickSquare(1, 0)
+    clickSquare(0, 1)
+    cy.get('button').contains('new game').click()
+    getSquare(0, 0).should('not.have.text', 'X')
+})
+
+it('shows the location of the move', () => {
+    cy.visit('/')
+    clickSquare(0, 0)
+    cy.get('button').contains('Go to move #1 (1, 1)')
+})
+
 function clickSquare(column, row) {
     getSquare(column, row).click()
 }
