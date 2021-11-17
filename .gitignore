@@ -7,6 +7,9 @@
 
 .idea
 
+#cypress
+cypress/videos
+
 # testing
 /coverage
 
