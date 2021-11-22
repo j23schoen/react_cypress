@@ -39,6 +39,16 @@ it('shows the location of the move', () => {
     cy.visit('/')
     clickSquare(0, 0)
     cy.get('button').contains('Go to move #1 (1, 1)')
+    clickSquare(1, 0)
+    cy.get('button').contains('Go to move #2 (2, 1)')
+})
+
+it('removes move from the board when going back in history', () => {
+    cy.visit('/')
+    clickSquare(0, 0)
+    clickSquare(1, 0)
+    cy.get('button').contains('Go to move #1 (1, 1)').click()
+    getSquare(1, 0).should('not.have.text', 'O')
 })
 
 function clickSquare(column, row) {
